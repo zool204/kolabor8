@@ -13,6 +13,39 @@
 <script src="js/min/jquery.ui.mouse.min.js"></script>
 <script src="js/min/jquery.ui.draggable.min.js"></script>
 <style>
+#board {
+	width: 910px;
+	min-height: 100px;
+	position: relative;
+}
+
+.title {
+	background-color: #52460a;
+	text-align: center;
+	color: white;
+	padding: 2px 0px;
+}
+
+#todo {
+	left: 302px;
+}
+
+#inprogress {
+	left: 604px;
+}
+
+#done {
+	left: 906px;
+}
+
+
+#thestory,#todo,#inprogress,#done {
+	background-color: tan;
+	position: absolute;
+	width: 300px;
+	min-height: 600px;
+	border: 2px solid black;
+}
 
 .draggable {
 	padding: 15px;
@@ -43,7 +76,6 @@
 	-ms-transform: rotate(1deg);
 	transform: rotate(1deg);
 }
-
 </style>
 <script>
 	$.ajaxSetup({
@@ -65,44 +97,90 @@
 </script>
 </head>
 <body>
+	<div id="board">
+		<div id="thestory">
+			<div class="title">Story</div>
+		</div>
+		<div id="todo">
+			<div class="title">To Do</div>
+		</div>
+		<div id="inprogress">
+			<div class="title">In Progress</div>
+		</div>
+		<div id="done">
+			<div class="title">Done</div>
+		</div>
+	</div>
+
 	<div class="demo">
-		<div id="storyA" class="ui-widget-content draggable story" style="position: absolute; left:000px;  top:000px; overflow: auto;">
-			<p><b>Story A</b></p>
+
+
+
+
+		<div id="storyA" class="ui-widget-content draggable story"
+			style="position: absolute; left: 000px; top: 000px; overflow: auto;">
+			<p>
+				<b>Story A</b>
+			</p>
 			<p>As a user I want to be able to drag this card around the board</p>
 		</div>
-		<div id="storyATask1" class="ui-widget-content draggable task" style="position: absolute; left:100px;  top:150px; overflow: auto;">
-			<p><b>Story A: Task 1</b></p>
+		<div id="storyATask1" class="ui-widget-content draggable task"
+			style="position: absolute; left: 100px; top: 150px; overflow: auto;">
+			<p>
+				<b>Story A: Task 1</b>
+			</p>
 			<p>Do Task 1</p>
 		</div>
-		<div id="storyATask2" class="ui-widget-content draggable task" style="position: absolute; left:200px;  top:150px; overflow: auto;">
-			<p><b>StoryA: Task 2</b></p>
+		<div id="storyATask2" class="ui-widget-content draggable task"
+			style="position: absolute; left: 200px; top: 150px; overflow: auto;">
+			<p>
+				<b>StoryA: Task 2</b>
+			</p>
 			<p>Do Task 2</p>
 		</div>
-		<div id="storyATask3" class="ui-widget-content draggable task" style="position: absolute; left:300px;  top:150px; overflow: auto;">
-			<p><b>Story A: Task 3</b></p>
+		<div id="storyATask3" class="ui-widget-content draggable task"
+			style="position: absolute; left: 300px; top: 150px; overflow: auto;">
+			<p>
+				<b>Story A: Task 3</b>
+			</p>
 			<p>Do Task 3</p>
 		</div>
-		
-		<div id="storyB" class="ui-widget-content draggable story" style="position: absolute; left:000px;  top:200px; overflow: auto;">
-			<p><b>Story B</b></p>
+
+		<div id="storyB" class="ui-widget-content draggable story"
+			style="position: absolute; left: 000px; top: 200px; overflow: auto;">
+			<p>
+				<b>Story B</b>
+			</p>
 			<p>As a user I want to be able to drag this card around the board</p>
 		</div>
-		<div id="storyBTask1" class="ui-widget-content draggable task" style="position: absolute; left:100px;  top:250px; overflow: auto;">
-			<p><b>Story B: Task 1</b></p>
+		<div id="storyBTask1" class="ui-widget-content draggable task"
+			style="position: absolute; left: 100px; top: 250px; overflow: auto;">
+			<p>
+				<b>Story B: Task 1</b>
+			</p>
 			<p>Do Task 1</p>
 		</div>
-		<div id="storyBTask2" class="ui-widget-content draggable task" style="position: absolute; left:200px;  top:250px; overflow: auto;">
-			<p><b>Story B: Task 2</b></p>
+		<div id="storyBTask2" class="ui-widget-content draggable task"
+			style="position: absolute; left: 200px; top: 250px; overflow: auto;">
+			<p>
+				<b>Story B: Task 2</b>
+			</p>
 			<p>Do Task 2</p>
 		</div>
 	</div>
 
+
 	<div>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<button id="updateButton">Update</button>
 		<p>Drag the index card, or click the button to see an updated JSON
 			response from the server</p>
 	</div>
-
-	<button id="updateButton">Update</button>
 
 	<div id="foo">Waiting...</div>
 </body>
