@@ -18,27 +18,22 @@
 		cache : false
 	});
 	$.fn.extend({
-		move : function(left) {
+		wibble : function(pos) {
 			return this.animate({
-				left : left
+				left : pos
 			});
 		},
-		dlg : $.fn.delegate
 	});
 
 	$(function() {
-		var $body = $(document.body), $deck, TASK_CARD = "<section class=transparent><div class=text>", DUMMY_TASK_X_POS = -150, 
-		R_MOUSEIN = /^mouse(enter|over)/i, zorder = 0, COLOURS = [
+		var $body = $(document.body), $blankcards, TASK_CARD = "<section class=transparent><div class=text>", DUMMY_TASK_X_POS = -150, zorder = 0, COLOURS = [
 				'blue', 'red', 'green', 'orange', 'pink' ];
-		$deck = $("<aside id=deck>").appendTo($body).dlg(
-				".dummyTask",
-				'hover',
+		$blankcards = $("<aside id=blankcards>").appendTo($body).delegate(".dummyTask", 'hover',
 				function(event) {
-					$(this).stop()
-							.move(
-									R_MOUSEIN.test(event.type) ? -10
-											: DUMMY_TASK_X_POS);
-				}).dlg(
+					$(this).wibble(-10);
+				}).delegate(".dummyTask", "mouseout", function(event) {
+			$(this).wibble(DUMMY_TASK_X_POS);
+		}).delegate(
 				".dummyTask",
 				"mousedown",
 				function(event) {
@@ -53,23 +48,22 @@
 					$clone.trigger(event);
 					$card.hide();
 					setTimeout(function() {
-						$card.css("left", -140).show().move(DUMMY_TASK_X_POS);
+						$card.css("left", -120).show().wibble(DUMMY_TASK_X_POS);
 					}, 1000);
 
 				});
 
-		$body.dlg(".task", "mousedown", function(event) {
+		$body.delegate(".task", "mousedown", function(event) {
 			$(this).addClass('transparent').css('z-index', zorder++);
-		}).dlg(".task", "mouseup", function(event) {
+		}).delegate(".task", "mouseup", function(event) {
 			$(this).removeClass('transparent');
 		});
 		$.each(COLOURS, function(i, color) {
-			$(TASK_CARD).appendTo($deck).addClass(
+			$(TASK_CARD).appendTo($blankcards).addClass(
 					'ui-widget-content draggable dummyTask').addClass(color)
 					.css("position", "absolute").css("top", i * 20).css("left",
-							-180).delay(i * 100).move((DUMMY_TASK_X_POS));
+							-180).delay(i * 100).wibble((DUMMY_TASK_X_POS));
 		});
-
 		$(".story").draggable();
 		$(".task").draggable();
 		$("#updateButton").click(
